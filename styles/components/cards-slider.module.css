@@ -1,0 +1,40 @@
+.sliderContainer {
+  position: relative;
+  overflow-x: hidden;
+}
+.slider {
+  display: grid;
+  grid-gap: 40px;
+  grid-auto-flow: column;
+  transition: transform 0.4s ease;
+}
+.sliderHeader {
+  margin-bottom: 32px;
+}
+.headingIcon {
+  margin-right: 12px;
+}
+.arrowBtn {
+  background-color: #0c0f14ce;
+  width: 40px;
+  height: 80px;
+  border: 2px solid var(--text-color);
+  border-radius: 4px;
+  position: absolute;
+  top: 45%;
+  cursor: pointer;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms cubic-bezier(0.55, 0, 1, 0.45) 0s;
+}
+.leftBtn {
+  left: 0;
+}
+.rightBtn {
+  right: 0;
+}
+.active {
+  opacity: 1;
+  pointer-events: all;
+}

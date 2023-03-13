@@ -1,0 +1,9 @@
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.rating {
+  color: var(--yellow);
+  margin-left: 8px;
+}
