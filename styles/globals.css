@@ -26,11 +26,12 @@ body {
     #0b0e14;
   min-height: 100vh;
   max-width: 1600px;
-  
+  position: relative;
+
   margin: auto;
   font-family: "Inter", sans-serif;
   color: var(--text-color);
-  overflow: hidden;
+  overflow-x: hidden;
   background-repeat: no-repeat;
 }
 input {

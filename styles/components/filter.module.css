@@ -1,0 +1,54 @@
+.filterSection {
+  display: flex;
+  max-width: 100%;
+  width: 900px;
+  margin: 4rem 0 2rem 0;
+  justify-content: space-around;
+}
+.filterSelect {
+  display: block;
+  padding: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--blue2);
+  border-radius: 4px;
+  background-color: var(--blue3);
+  border: none;
+  padding: 0.7rem 0;
+  width: 15%;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Style the arrow icon */
+/* .filterSelect::after {
+  content: "\25BC";
+  font-size: 32px;
+  font-weight: bold;
+  color: #ff0000;
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+} */
+
+/* Style the options */
+.filterOption {
+  font-size: 1rem;
+  width: 100%;
+}
+.filterLink {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 13px;
+  width: 20%;
+  height: 41px;
+  background: #437f97;
+  border-radius: 44px;
+}
+.filterIcon {
+  width: 20px;
+  margin-left: 6px;
+}

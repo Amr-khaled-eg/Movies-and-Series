@@ -92,7 +92,7 @@
 }
 .showSliderBtnOver {
   width: 100%;
-  transition: width 4s ease-in-out;
+  transition: width 7s ease-in-out;
 }
 .btnImg {
   height: 100%;

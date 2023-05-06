@@ -1,0 +1,6 @@
+.mainSection {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  row-gap: 6rem;
+  padding: 4rem 0 2rem 0;
+}
