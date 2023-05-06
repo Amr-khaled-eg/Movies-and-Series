@@ -9,7 +9,7 @@ const Rating = ({ rating, ...other }: RatingProps) => {
   return (
     <div className={styles.ratingContainer} {...other}>
       <Image src={Star} alt="star" />
-      <span className={styles.rating}>{rating}</span>
+      <span className={styles.rating}>{rating.toFixed(1)}</span>
     </div>
   );
 };
