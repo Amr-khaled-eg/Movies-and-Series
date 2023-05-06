@@ -9,9 +9,10 @@ import { useRef, useState } from "react";
 type CardsSliderProps = {
   cards: [CardData];
   icon: StaticImport;
+  header: string;
 };
 
-const CardsSlider = ({ cards, icon }: CardsSliderProps) => {
+const CardsSlider = ({ cards, icon, header }: CardsSliderProps) => {
   const [pos, setPos] = useState(0);
   const [active, setActive] = useState({ left: false, right: true });
   const ref = useRef<HTMLDivElement>(null);
@@ -38,7 +39,8 @@ const CardsSlider = ({ cards, icon }: CardsSliderProps) => {
   return (
     <section className={styles.sliderContainer}>
       <h2 className={styles.sliderHeader}>
-        <Image src={icon} alt="string" className={styles.headingIcon} /> Trending
+        <Image src={icon} alt="string" className={styles.headingIcon} />
+        {header}
       </h2>
       <div
         className={styles.slider}
