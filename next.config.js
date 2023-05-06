@@ -6,13 +6,15 @@ const nextConfig = {
 module.exports = nextConfig;
 module.exports = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "image.tmdb.org",
-        pathname: "/t/p/original/**",
-        port: "",
-      },
-    ],
+    domains: ["image.tmdb.org"],
+
+    // remotePatterns: [
+    //   {
+    //     protocol: "https",
+    //     hostname: "image.tmdb.org",
+    //     pathname: "/t/p/original/**",
+    //     port: "",
+    //   },
+    // ],
   },
 };
