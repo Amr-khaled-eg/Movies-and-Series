@@ -2,9 +2,9 @@ import styles from "@/styles/components/main-slider.module.css";
 import { CardData } from "@/components/card/card.component";
 import Image from "next/image";
 import Rating from "../rating/rating.comopnent";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 type SliderProps = {
-  items: Array<CardData & { story: string }>;
+  items: Array<CardData & { overview: string }>;
 };
 let timeOut: string | number | NodeJS.Timeout = 0;
 const MainSlider = ({ items }: SliderProps) => {
@@ -17,7 +17,7 @@ const MainSlider = ({ items }: SliderProps) => {
     timeOut = setTimeout(() => {
       let index = shownIndex == 3 ? shownIndex - 3 : shownIndex + 1;
       setShowIndex(index);
-    }, 4000);
+    }, 7000);
   }, [shownIndex]);
 
   return (
@@ -25,14 +25,14 @@ const MainSlider = ({ items }: SliderProps) => {
       <div className={styles.imagesContainer}>
         {items.map((item, i) => (
           <Image
-            src={`https://image.tmdb.org/t/p/original${item.imagePath}`}
+            src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
             alt="cover image"
             className={`${styles.hide} ${styles.hideImg} ${
               shownIndex == i && styles.show
             } ${styles.sliderImage}`}
             width={500}
             height={700}
-            key={item.imagePath + i}
+            key={item.poster_path + i}
           />
         ))}
       </div>
@@ -42,13 +42,13 @@ const MainSlider = ({ items }: SliderProps) => {
             className={`${styles.itemInfo} ${styles.hide} ${styles.hideInfo} ${
               shownIndex == i && styles.show
             }`}
-            key={item.title + i}
+            key={item.title || item.name + i}
           >
-            <Rating rating={item.rating} className={""} />
+            <Rating rating={item.vote_average} className={""} />
             <h1 className={styles.title}>{item.title}</h1>
             <div className={styles.storyContainer}>
               <h3 className={styles.storyTitle}>story</h3>
-              <p>{item.story}</p>
+              <p>{item.overview}</p>
             </div>
           </div>
         ))}
@@ -57,7 +57,7 @@ const MainSlider = ({ items }: SliderProps) => {
             <button
               className={styles.sliderBtn}
               onClick={() => setShowIndex(i)}
-              key={i + item.rating}
+              key={i + item.vote_average}
             >
               <div
                 className={`${styles.sliderBtnOver} ${
@@ -65,15 +65,15 @@ const MainSlider = ({ items }: SliderProps) => {
                 }`}
               ></div>
               <Image
-                src={`https://image.tmdb.org/t/p/original${item.imagePath}`}
+                src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
                 alt="cover image"
                 width={80}
                 height={120}
                 className={styles.btnImg}
               />
               <div className={styles.btnInfo}>
-                <Rating rating={item.rating} />
-                <h4>{item.title}</h4>
+                <Rating rating={item.vote_average} />
+                <h4>{item.title || item.name}</h4>
               </div>
             </button>
           ))}
