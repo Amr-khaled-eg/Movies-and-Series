@@ -7,6 +7,10 @@
   --yellow: #f3d362;
   --red: #a03838;
 }
+html {
+  scroll-behavior: smooth;
+  position: relative;
+}
 * {
   padding: 0;
   margin: 0;
@@ -26,7 +30,7 @@ body {
     #0b0e14;
   min-height: 100vh;
   max-width: 1600px;
-  position: relative;
+  /* position: relative; */
 
   margin: auto;
   font-family: "Inter", sans-serif;

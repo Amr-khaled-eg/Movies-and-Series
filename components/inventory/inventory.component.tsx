@@ -4,11 +4,13 @@ import Card from "../card/card.component";
 import { Item } from "@/pages/movies";
 import { useRouter } from "next/router";
 import { stringify } from "querystring";
+import { v4 as uuidv4 } from "uuid";
 type InventroyProps = {
   initialItems: Item[];
   FetchMore: (pages: number, query: string) => Promise<Item[]>;
+  location: string;
 };
-const Inventory = ({ initialItems, FetchMore }: InventroyProps) => {
+const Inventory = ({ initialItems, FetchMore, location }: InventroyProps) => {
   const lastDiv = useRef(null);
   const [loadedPages, setLoadedPages] = useState(1);
   const [loadedItems, setLoadedItems] = useState<Item[]>(initialItems);
@@ -51,7 +53,7 @@ const Inventory = ({ initialItems, FetchMore }: InventroyProps) => {
     <>
       <section className={styles.grid}>
         {loadedItems.map((card, i) => (
-          <Card {...card} to="#" key={card.title + i} />
+          <Card {...card} to={`/item/${location}/${card.id}`} key={uuidv4()} />
         ))}
       </section>
       <div className={styles.lastDiv} ref={lastDiv}></div>

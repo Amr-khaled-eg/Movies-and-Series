@@ -3,7 +3,6 @@ import { GetServerSidePropsContext } from "next";
 import { Item } from "..";
 import Inventory from "@/components/inventory/inventory.component";
 import Filter from "@/components/filter/fiilter.comoponent";
-import { useRouter } from "next/router";
 import { stringify } from "querystring";
 type FlteredItemsProps = {
   initialItems: Item[];
@@ -13,12 +12,14 @@ const FetchMore = async (page: number, query: string): Promise<Item[]> => {
   return data.items;
 };
 export default function FilteredMovies({ initialItems }: FlteredItemsProps) {
-  const router = useRouter();
-
   return (
     <>
       <Filter />
-      <Inventory FetchMore={FetchMore} initialItems={initialItems} />
+      <Inventory
+        location="movie"
+        FetchMore={FetchMore}
+        initialItems={initialItems}
+      />
     </>
   );
 }

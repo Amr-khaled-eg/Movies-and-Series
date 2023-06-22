@@ -3,6 +3,7 @@ import { CardData } from "@/components/card/card.component";
 import Image from "next/image";
 import Rating from "../rating/rating.comopnent";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 type SliderProps = {
   items: Array<CardData & { overview: string }>;
 };
@@ -32,7 +33,7 @@ const MainSlider = ({ items }: SliderProps) => {
             } ${styles.sliderImage}`}
             width={500}
             height={700}
-            key={item.poster_path + i}
+            key={uuidv4()}
           />
         ))}
       </div>
@@ -42,7 +43,7 @@ const MainSlider = ({ items }: SliderProps) => {
             className={`${styles.itemInfo} ${styles.hide} ${styles.hideInfo} ${
               shownIndex == i && styles.show
             }`}
-            key={item.title || item.name + i}
+            key={uuidv4()}
           >
             <Rating rating={item.vote_average} className={""} />
             <h1 className={styles.title}>{item.title}</h1>
@@ -57,7 +58,7 @@ const MainSlider = ({ items }: SliderProps) => {
             <button
               className={styles.sliderBtn}
               onClick={() => setShowIndex(i)}
-              key={i + item.vote_average}
+              key={uuidv4()}
             >
               <div
                 className={`${styles.sliderBtnOver} ${

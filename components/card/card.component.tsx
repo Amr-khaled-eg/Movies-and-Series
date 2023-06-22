@@ -8,6 +8,7 @@ export type CardData = {
   vote_average: number;
   title?: string;
   name: string;
+  id: number;
 };
 type CardProps = {
   to: string;

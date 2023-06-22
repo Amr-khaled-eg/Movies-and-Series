@@ -22,9 +22,24 @@ export default function Seires({ topRated, trending, popular }: MoviesProps) {
   return (
     <section className={styles.mainSection}>
       <MainSlider items={[topRated[0], topRated[1], trending[0], popular[0]]} />
-      <CardsSlider header="Top-Rated" cards={topRated} icon={TopRated} />
-      <CardsSlider header="Trending" cards={popular} icon={Trending} />
-      <CardsSlider header="Popular" cards={trending} icon={Popular} />
+      <CardsSlider
+        header="Top-Rated"
+        cards={topRated}
+        icon={TopRated}
+        location="tv"
+      />
+      <CardsSlider
+        header="Trending"
+        cards={popular}
+        icon={Trending}
+        location="tv"
+      />
+      <CardsSlider
+        header="Popular"
+        cards={trending}
+        icon={Popular}
+        location="tv"
+      />
     </section>
   );
 }

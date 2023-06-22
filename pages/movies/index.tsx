@@ -7,7 +7,6 @@ import { CardData } from "@/components/card/card.component";
 import MainSlider from "@/components/main-slider/main-slider.component";
 import { Categories } from "@/components/filter/fiilter.comoponent";
 import styles from "@/styles/home.module.css";
-import { log } from "console";
 export type Item = {
   [key: string]: any;
   overview: string;
@@ -23,9 +22,9 @@ export default function Movies({ topRated, trending, popular }: MoviesProps) {
   return (
     <section className={styles.mainSection}>
       <MainSlider items={[topRated[0], topRated[1], trending[0], popular[0]]} />
-      <CardsSlider header="Top-Rated" cards={topRated} icon={TopRated} />
-      <CardsSlider header="Trending" cards={trending} icon={Trending} />
-      <CardsSlider header="Popular" cards={popular} icon={Popular} />
+      <CardsSlider header="Top-Rated" cards={topRated} icon={TopRated} location="movie" />
+      <CardsSlider header="Trending" cards={trending} icon={Trending} location="movie" />
+      <CardsSlider header="Popular" cards={popular} icon={Popular} location="movie" />
     </section>
   );
 }

@@ -7,3 +7,10 @@
   color: var(--yellow);
   margin-left: 8px;
 }
+.l {
+  font-size: 2rem;
+}
+.lStar {
+  width: 36px;
+  height: 36px;
+}

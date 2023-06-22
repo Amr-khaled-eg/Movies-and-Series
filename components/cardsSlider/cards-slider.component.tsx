@@ -10,9 +10,10 @@ type CardsSliderProps = {
   cards: [CardData];
   icon: StaticImport;
   header: string;
+  location: string;
 };
 
-const CardsSlider = ({ cards, icon, header }: CardsSliderProps) => {
+const CardsSlider = ({ cards, icon, header, location }: CardsSliderProps) => {
   const [pos, setPos] = useState(0);
   const [active, setActive] = useState({ left: false, right: true });
   const ref = useRef<HTMLDivElement>(null);
@@ -48,7 +49,11 @@ const CardsSlider = ({ cards, icon, header }: CardsSliderProps) => {
         ref={ref}
       >
         {cards.map((card: CardData, i) => (
-          <Card {...card} to="#" key={card.title + i} />
+          <Card
+            {...card}
+            to={`/item/${location}/${card.id}`}
+            key={card.title + i}
+          />
         ))}
       </div>
       <button

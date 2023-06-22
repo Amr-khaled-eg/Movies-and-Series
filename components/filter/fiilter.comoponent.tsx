@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
 import { FetchMyAPI } from "@/utils/fetch/fetch-data.utils";
 import { countries } from "@/public/countries.js";
+import { v4 as uuidv4 } from "uuid";
 
 type genre = {
   id: number;
@@ -137,7 +138,7 @@ const Filter = () => {
               <option
                 value={item.countryCode + "_" + item.languageCode}
                 className={styles.filterSelect}
-                key={i + item.name}
+                key={uuidv4()}
               >
                 {item.name}
               </option>
@@ -159,7 +160,7 @@ const Filter = () => {
               <option
                 value={item.id}
                 className={styles.filterSelect}
-                key={i + item.name}
+                key={uuidv4()}
               >
                 {item.name}
               </option>
