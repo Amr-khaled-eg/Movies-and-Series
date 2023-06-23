@@ -40,7 +40,7 @@ const Inventory = ({ initialItems, FetchMore, location }: InventroyProps) => {
         stringify(router.query)
       );
       setIsLoading(false);
-      setLoadedItems(loadedItems.concat(newItems));
+      setLoadedItems((lastLoadedItems) => [...lastLoadedItems, ...newItems]);
     };
     updateItems();
   }, [loadedPages]);

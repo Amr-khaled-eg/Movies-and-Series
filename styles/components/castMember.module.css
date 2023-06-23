@@ -1,0 +1,17 @@
+.memberContainer {
+  display: flex;
+  width: 300px;
+  align-items: center;
+}
+.castMemberImage {
+  border-radius: 100px;
+  object-fit: cover;
+  margin-right: 2rem;
+}
+.memberName {
+  color: var(--white);
+}
+.memberCharacter {
+  color: rgb(158, 158, 158);
+  margin: 8px 0;
+}
