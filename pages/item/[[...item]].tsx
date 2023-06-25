@@ -1,10 +1,18 @@
 import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
 import { Fetch } from "@/utils/fetch/fetch-data.utils";
 import styles from "@/styles/item.module.css";
 import Image from "next/image";
 import Rating from "@/components/rating/rating.comopnent";
 import CastMember from "@/components/castMemeber/castMember.component";
+import SectionHeader from "@/components/sectionHeader/sectionHeader.component";
+import CastIcon from "@/public/cast.svg";
 import { v4 as uuidV4 } from "uuid";
+import Review from "@/components/review/review.component";
+import ReviewIcon from "@/public/star.svg";
+import Link from "next/link";
+import HeartIcon from "@/public/heart.svg";
+import CardsSlider from "@/components/cardsSlider/cards-slider.component";
 type ItemData = {
   vote_average: number;
   name?: string;
@@ -21,16 +29,17 @@ type ItemData = {
 type ItemProps = {
   data: ItemData;
   cast: any;
+  reviews: any;
+  similar: any;
 };
-const Item = ({ data, cast }: ItemProps) => {
+const Item = ({ data, cast, reviews, similar }: ItemProps) => {
+  const { query } = useRouter();
   return (
     <>
-      <Image
+      <img
         className={styles.backdropImage}
         src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
         alt={data.title || ""}
-        width={1900}
-        height={1000}
       />
       <div className={styles.overlay}></div>
       <section className={styles.mainSection}>
@@ -72,12 +81,56 @@ const Item = ({ data, cast }: ItemProps) => {
         </div>
       </section>
       <section>
-        <h1 className={styles.castHeader}>Cast</h1>
-        <section className={styles.cast}>
+        <SectionHeader
+          header="Cast"
+          icon={CastIcon}
+          className={styles.sectionHeader}
+        />
+        <section className={`${styles.grid}`}>
           {cast.slice(0, 9).map((actor: any, i: number) => (
             <CastMember member={actor} key={uuidV4()} />
           ))}
         </section>
+      </section>
+      <section>
+        <SectionHeader
+          header="Reviews"
+          icon={ReviewIcon}
+          className={styles.sectionHeader}
+        />
+
+        {reviews.length > 0 ? (
+          <section className={`${styles.grid} ${styles.reviews} `}>
+            {reviews.slice(0, 3).map((review: any) => (
+              <Review
+                rating={review.author_details.rating}
+                name={review.author}
+                content={review.content}
+                avatar={review.author_details.avatar_path}
+                key={uuidV4()}
+              />
+            ))}
+            <Link href="#">
+              <div className={styles.more}>
+                <h2>More...</h2>
+              </div>
+            </Link>
+          </section>
+        ) : (
+          <div>
+            <h2 className={styles.noReviews}>No Reviews Found</h2>
+          </div>
+        )}
+      </section>
+      <section className={styles.similar}>
+        {query.item && (
+          <CardsSlider
+            cards={similar}
+            header="You May Also Like"
+            icon={HeartIcon}
+            location={query.item[0]}
+          />
+        )}
       </section>
     </>
   );
@@ -91,6 +144,12 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
   );
   const castData = await Fetch(
     `https://api.themoviedb.org/3/${query.item[0]}/${query.item[1]}/credits?api_key=${process.env.API_KEY}`
+  );
+  const reviewData = await Fetch(
+    `https://api.themoviedb.org/3/${query.item[0]}/${query.item[1]}/reviews?api_key=${process.env.API_KEY}`
+  );
+  const similarData = await Fetch(
+    `https://api.themoviedb.org/3/${query.item[0]}/${query.item[1]}/recommendations?api_key=${process.env.API_KEY}`
   );
   const {
     vote_average,
@@ -119,6 +178,8 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
         backdrop_path,
       },
       cast: castData.cast,
+      reviews: reviewData.results,
+      similar: similarData.results,
     },
   };
 }

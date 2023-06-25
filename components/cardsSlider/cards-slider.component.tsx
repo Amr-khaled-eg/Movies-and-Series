@@ -4,11 +4,12 @@ import styles from "@/styles/components/cards-slider.module.css";
 import Left from "@/public/left.svg";
 import Right from "@/public/right.svg";
 import Image from "next/image";
-import { StaticImport } from "next/image";
 import { useRef, useState } from "react";
+import { v4 as uuidV4 } from "uuid";
+import SectionHeader from "../sectionHeader/sectionHeader.component";
 type CardsSliderProps = {
   cards: [CardData];
-  icon: StaticImport;
+  icon: string;
   header: string;
   location: string;
 };
@@ -39,21 +40,14 @@ const CardsSlider = ({ cards, icon, header, location }: CardsSliderProps) => {
   };
   return (
     <section className={styles.sliderContainer}>
-      <h2 className={styles.sliderHeader}>
-        <Image src={icon} alt="string" className={styles.headingIcon} />
-        {header}
-      </h2>
+      <SectionHeader icon={icon} header={header} />
       <div
         className={styles.slider}
         style={{ transform: `translateX(${pos * -1}px)` }}
         ref={ref}
       >
         {cards.map((card: CardData, i) => (
-          <Card
-            {...card}
-            to={`/item/${location}/${card.id}`}
-            key={card.title + i}
-          />
+          <Card {...card} to={`/item/${location}/${card.id}`} key={uuidV4()} />
         ))}
       </div>
       <button

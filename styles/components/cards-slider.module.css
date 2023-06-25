@@ -8,12 +8,7 @@
   grid-auto-flow: column;
   transition: transform 0.4s ease;
 }
-.sliderHeader {
-  margin-bottom: 32px;
-}
-.headingIcon {
-  margin-right: 12px;
-}
+
 .arrowBtn {
   background-color: #0c0f14ce;
   width: 40px;

@@ -1,0 +1,9 @@
+.headerContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.headingIcon {
+  margin-right: 12px;
+}

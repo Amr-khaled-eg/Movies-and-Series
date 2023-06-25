@@ -17,7 +17,7 @@ const Rating = ({ rating, size, ...other }: RatingProps) => {
         className={`${styles.star} ${customeSizeStar}`}
       />
       <span className={`${styles.rating} ${customeSizeRating}`}>
-        {rating.toFixed(1)}
+        {rating?.toFixed(1)}
       </span>
     </div>
   );

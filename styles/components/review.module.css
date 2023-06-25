@@ -1,0 +1,16 @@
+.review {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--blue3);
+  padding: 1.5rem 2rem;
+  border-radius: 18px;
+}
+.user {
+  display: flex;
+  margin: 1rem 0;
+  align-items: center;
+}
+.avatar {
+  border-radius: 100px;
+  margin-right: 1rem;
+}
