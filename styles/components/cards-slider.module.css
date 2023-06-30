@@ -8,7 +8,15 @@
   grid-auto-flow: column;
   transition: transform 0.4s ease;
 }
-
+.sliderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.seeAll {
+  margin-bottom: 2rem;
+}
 .arrowBtn {
   background-color: #0c0f14ce;
   width: 40px;

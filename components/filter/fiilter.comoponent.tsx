@@ -43,7 +43,7 @@ let currentYear = new Date().getFullYear();
 
 export const Categories = {
   TOP_RATED: "vote_average.gte=8",
-  POPULAR: "",
+  BestKorean: `vote_average.gte=8&with_original_language=ko&region=KR`,
   TRENDING: `primary_release_year.gte=${currentYear}&primary_release_year.lte=${
     currentYear + 1
   }`,

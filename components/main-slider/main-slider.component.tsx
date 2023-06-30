@@ -45,7 +45,7 @@ const MainSlider = ({ items }: SliderProps) => {
             key={item.title || item.name + i}
           >
             <Rating rating={item.vote_average} className={""} />
-            <h1 className={styles.title}>{item.title}</h1>
+            <h1 className={styles.title}>{item.title || item.name}</h1>
             <div className={styles.storyContainer}>
               <h3 className={styles.storyTitle}>story</h3>
               <p>{item.overview}</p>
@@ -73,7 +73,7 @@ const MainSlider = ({ items }: SliderProps) => {
               />
               <div className={styles.btnInfo}>
                 <Rating rating={item.vote_average} />
-                <h4>{item.title || item.name}</h4>
+                <h4 className={styles.btnHeading}>{item.title || item.name}</h4>
               </div>
             </button>
           ))}

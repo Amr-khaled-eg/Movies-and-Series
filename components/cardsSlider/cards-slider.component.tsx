@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
 import SectionHeader from "../sectionHeader/sectionHeader.component";
+import Link from "next/link";
 type CardsSliderProps = {
   cards: [CardData];
   icon: string;
@@ -38,9 +39,16 @@ const CardsSlider = ({ cards, icon, header, location }: CardsSliderProps) => {
     setActive({ left: true, right: true });
     setPos(newPos);
   };
+  const sellAllLocation = location === "movie" ? "movies" : "seiers";
   return (
     <section className={styles.sliderContainer}>
-      <SectionHeader icon={icon} header={header} />
+      <div className={styles.sliderHeader}>
+        <SectionHeader icon={icon} header={header} />
+        <Link href={`${sellAllLocation}/filtered`} className={styles.seeAll}>
+          See all
+        </Link>
+      </div>
+
       <div
         className={styles.slider}
         style={{ transform: `translateX(${pos * -1}px)` }}

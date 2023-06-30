@@ -14,17 +14,32 @@ export type Item = {
 
 type MoviesProps = {
   topRated: [Item];
-  popular: [Item];
+  korean: [Item];
   trending: [Item];
 };
 
-export default function Movies({ topRated, trending, popular }: MoviesProps) {
+export default function Movies({ topRated, trending, korean }: MoviesProps) {
   return (
     <section className={styles.mainSection}>
-      <MainSlider items={[topRated[0], topRated[1], trending[0], popular[0]]} />
-      <CardsSlider header="Top-Rated" cards={topRated} icon={TopRated} location="movie" />
-      <CardsSlider header="Trending" cards={trending} icon={Trending} location="movie" />
-      <CardsSlider header="Popular" cards={popular} icon={Popular} location="movie" />
+      <MainSlider items={[topRated[0], topRated[1], trending[0], korean[0]]} />
+      <CardsSlider
+        header="Top-Rated"
+        cards={topRated}
+        icon={TopRated}
+        location="movie"
+      />
+      <CardsSlider
+        header="Trending"
+        cards={trending}
+        icon={Trending}
+        location="movie"
+      />
+      <CardsSlider
+        header="Best Korean"
+        cards={korean}
+        icon={Popular}
+        location="movie"
+      />
     </section>
   );
 }
@@ -35,14 +50,14 @@ export async function getServerSideProps() {
   const trendingMovies = await FetchMyAPI(
     `/movies?category=${Categories.TRENDING}`
   );
-  const popularMovies = await FetchMyAPI(
-    `/movies?category=${Categories.TOP_RATED}`
+  const korean = await FetchMyAPI(
+    `/movies?category=${Categories.TOP_RATED}&country=KR_ko`
   );
   return {
     props: {
       topRated: topRatedMovies.items,
       trending: trendingMovies.items,
-      popular: popularMovies.items,
+      korean: korean.items,
     },
   };
 }
