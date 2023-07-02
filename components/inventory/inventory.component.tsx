@@ -32,6 +32,8 @@ const Inventory = ({ initialItems, FetchMore, location }: InventroyProps) => {
     };
   }, []);
   useEffect(() => {
+    console.log(loadedPages);
+
     if (loadedPages === 1) return;
     const updateItems = async () => {
       setIsLoading(true);

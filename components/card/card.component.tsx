@@ -6,6 +6,26 @@ import Link from "next/link";
 import { MouseEventHandler, useEffect } from "react";
 import Rating from "../rating/rating.comopnent";
 import { useState } from "react";
+import { FavoritesItem } from "../bigCard/bigCard.component";
+
+export const toggleItemInLocalStorage = (key: string, item: FavoritesItem) => {
+  let favorites = localStorage.getItem("favorites");
+  if (!favorites) {
+    localStorage.setItem(key, JSON.stringify({}));
+    favorites = "{}";
+  }
+  let oldFavorites = JSON.parse(favorites);
+  if (oldFavorites[item.id]) {
+    delete oldFavorites[item.id];
+    localStorage.setItem(key, JSON.stringify(oldFavorites));
+  } else {
+    let newFavorites = {
+      ...oldFavorites,
+      [item.id]: item,
+    };
+    localStorage.setItem(key, JSON.stringify(newFavorites));
+  }
+};
 export type CardData = {
   poster_path: string;
   vote_average: number;
@@ -16,6 +36,7 @@ export type CardData = {
 type CardProps = {
   to: string;
   id: number;
+  className?: string;
 } & CardData;
 
 const Card = ({
@@ -25,11 +46,13 @@ const Card = ({
   name = "",
   id,
   to,
+  className,
 }: CardProps) => {
   const [isLoved, setIsLoved] = useState(false);
   useEffect(() => {
-    const item = localStorage.getItem(String(id));
-    if (item) {
+    const favorites = localStorage.getItem("favorites");
+    if (!favorites) return;
+    if (JSON.parse(favorites)[id]) {
       setIsLoved(true);
     } else {
       setIsLoved(false);
@@ -38,20 +61,17 @@ const Card = ({
   let itemTitle = title ? title : name;
   const toggleLoved: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
-    const item = localStorage.getItem(String(id));
-    if (item) {
-      localStorage.removeItem(String(id));
-      setIsLoved(false);
-    } else {
-      localStorage.setItem(
-        String(id),
-        JSON.stringify({ poster_path, vote_average, itemTitle, id, to })
-      );
-      setIsLoved(true);
-    }
+    toggleItemInLocalStorage("favorites", {
+      poster_path,
+      vote_average,
+      itemTitle,
+      id,
+      to,
+    });
+    setIsLoved((prev) => !prev);
   };
   return (
-    <Link href={to} className={styles.cardLink}>
+    <Link href={to} className={`${styles.cardLink} ${className}`}>
       <section className={styles.card}>
         <button className={styles.addToFavBtn} onClick={toggleLoved}>
           <Image

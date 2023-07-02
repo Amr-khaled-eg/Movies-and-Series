@@ -63,18 +63,6 @@ const NavLinks = ({ show, toggleShow }: NavLinksProps) => {
             Favorites
           </Link>
         </li>
-        <li>
-          <Link
-            href="/history"
-            className={
-              asPath.split("/")[1] === "history"
-                ? `${styles.navLink} ${styles.navLinkActive}`
-                : styles.navLink
-            }
-          >
-            History
-          </Link>
-        </li>
       </ul>
     </>
   );

@@ -119,7 +119,6 @@ const Filter = () => {
           Category
         </option>
         <option value={Categories.TOP_RATED}>Top-Rated</option>
-        <option value={Categories.POPULAR}>Popular</option>
         <option value={Categories.TRENDING}>Trending</option>
       </select>
       <select

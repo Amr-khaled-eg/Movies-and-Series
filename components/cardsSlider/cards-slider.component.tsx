@@ -1,13 +1,14 @@
-import Card from "../card/card.component";
 import { CardData } from "../card/card.component";
+import SectionHeader from "../sectionHeader/sectionHeader.component";
 import styles from "@/styles/components/cards-slider.module.css";
+import Card from "../card/card.component";
+import Link from "next/link";
+import Glider from "react-glider";
+import "glider-js/glider.min.css";
 import Left from "@/public/left.svg";
 import Right from "@/public/right.svg";
 import Image from "next/image";
-import { useRef, useState } from "react";
 import { v4 as uuidV4 } from "uuid";
-import SectionHeader from "../sectionHeader/sectionHeader.component";
-import Link from "next/link";
 type CardsSliderProps = {
   cards: [CardData];
   icon: string;
@@ -16,30 +17,8 @@ type CardsSliderProps = {
 };
 
 const CardsSlider = ({ cards, icon, header, location }: CardsSliderProps) => {
-  const [pos, setPos] = useState(0);
-  const [active, setActive] = useState({ left: false, right: true });
-  const ref = useRef<HTMLDivElement>(null);
-  const STEP = ref.current ? ref.current.offsetWidth : 400;
-  const updatePos = (newPos: number) => {
-    if (newPos < 0) {
-      setPos(0);
-      setActive({ right: true, left: false });
-      return;
-    }
-    if (cards.length * 250 < ref.current.offsetWidth + newPos) {
-      // ref.current.style.transform = `translateX(${(ref.current.getBoundingClientRect().right - ref.current?.lastChild.getBoundingClientRect().right)}px)`;
-      setPos(
-        (ref.current.getBoundingClientRect().right -
-          ref.current?.lastChild.getBoundingClientRect().right) *
-          -1
-      );
-      setActive({ left: true, right: false });
-      return;
-    }
-    setActive({ left: true, right: true });
-    setPos(newPos);
-  };
-  const sellAllLocation = location === "movie" ? "movies" : "seiers";
+  const sellAllLocation = location === "movie" ? "movies" : "seires";
+
   return (
     <section className={styles.sliderContainer}>
       <div className={styles.sliderHeader}>
@@ -48,33 +27,41 @@ const CardsSlider = ({ cards, icon, header, location }: CardsSliderProps) => {
           See all
         </Link>
       </div>
-
-      <div
-        className={styles.slider}
-        style={{ transform: `translateX(${pos * -1}px)` }}
-        ref={ref}
+      <Glider
+        draggable
+        hasArrows={true}
+        arrows={{
+          prev: `#${header.slice(0, 2)}b`,
+          next: `#${header.slice(0, 2)}n`,
+        }}
+        slidesToScroll={"auto"}
+        slidesToShow={"auto"}
+        itemWidth={210}
+        dragVelocity={1.5}
       >
         {cards.map((card: CardData, i) => (
-          <Card {...card} to={`/item/${location}/${card.id}`} key={uuidV4()} />
+          <Card
+            {...card}
+            to={`/item/${location}/${card.id}`}
+            key={uuidV4()}
+            className={styles.cardMobile}
+          />
         ))}
-      </div>
+      </Glider>
       <button
-        className={`${styles.arrowBtn} ${styles.leftBtn} ${
-          active.left && styles.active
-        }`}
-        onClick={() => updatePos(pos - STEP)}
+        className={`${styles.arrowBtn} ${styles.leftBtn}`}
+        id={`${header.slice(0, 2)}b`}
       >
         <Image src={Left} alt="back" />
       </button>
       <button
-        className={`${styles.arrowBtn} ${styles.rightBtn} ${
-          active.right && styles.active
-        }`}
-        onClick={() => updatePos(pos + STEP)}
+        className={`${styles.arrowBtn} ${styles.rightBtn}`}
+        id={`${header.slice(0, 2)}n`}
       >
         <Image src={Right} alt="next" />
       </button>
     </section>
   );
 };
+
 export default CardsSlider;

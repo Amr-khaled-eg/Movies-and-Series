@@ -6,6 +6,14 @@
 .rating {
   color: var(--yellow);
   margin-left: 8px;
+  margin-top: 3px;
+}
+.m {
+  font-size: 1.5rem;
+}
+.mStar {
+  width: 28px;
+  height: 28px;
 }
 .l {
   font-size: 2rem;

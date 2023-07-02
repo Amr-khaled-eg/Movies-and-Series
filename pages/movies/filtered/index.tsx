@@ -8,8 +8,14 @@ type FlteredItemsProps = {
   initialItems: Item[];
 };
 const FetchMore = async (page: number, query: string): Promise<Item[]> => {
-  const data = await FetchMyAPI(`/movies?page=${page}&${query}`);
-  return data.items;
+  console.log(page + " hhhhh");
+  try {
+    const data = await FetchMyAPI(`/movies?page=${page}&${query}`);
+    return data.items;
+  } catch (e: any) {
+    console.error(e.message);
+    return [];
+  }
 };
 export default function FilteredMovies({ initialItems }: FlteredItemsProps) {
   return (
