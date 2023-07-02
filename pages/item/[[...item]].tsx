@@ -74,7 +74,7 @@ const Item = ({ data, cast, reviews, similar }: ItemProps) => {
         <div>
           <span className={styles.types}>Language</span>:&emsp;
           <span className={styles.typeValue}>{data.original_language}</span>
-        </div>{" "}
+        </div>
         <div>
           <span className={styles.types}>Adult</span>:&emsp;
           <span className={styles.typeValue}>{String(data.adult)}</span>
@@ -118,7 +118,9 @@ const Item = ({ data, cast, reviews, similar }: ItemProps) => {
           </section>
         ) : (
           <div>
-            <h2 className={styles.noReviews}>No Reviews Found</h2>
+            <h2 className={`${styles.more} ${styles.noReviews}`}>
+              No Reviews Found
+            </h2>
           </div>
         )}
       </section>

@@ -2,12 +2,6 @@
   position: relative;
   overflow-x: hidden;
 }
-.slider {
-  display: grid;
-  grid-gap: 40px;
-  grid-auto-flow: column;
-  transition: transform 0.4s ease;
-}
 .sliderHeader {
   display: flex;
   justify-content: space-between;
@@ -33,11 +27,4 @@
 }
 .rightBtn {
   right: 0;
-}
-
-@media only screen and (max-width: 500px) {
-  .cardMobile {
-    width: calc(200px - 1rem) !important;
-    margin-right: 1rem !important;
-  }
 }

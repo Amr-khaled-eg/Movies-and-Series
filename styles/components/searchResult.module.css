@@ -1,0 +1,19 @@
+.resultLink {
+  width: 100%;
+}
+.result {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
+  border-bottom: 2px var(--blue3) solid;
+  padding-bottom: 1rem;
+}
+.resultImage {
+  margin-right: 2rem;
+}
+.resultInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 70%;
+}

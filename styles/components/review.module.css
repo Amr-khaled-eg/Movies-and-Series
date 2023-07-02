@@ -1,9 +1,11 @@
 .review {
   display: flex;
   flex-direction: column;
+  width: 100%;
   background-color: var(--blue3);
   padding: 1.5rem 2rem;
   border-radius: 18px;
+  text-overflow: ellipsis;
 }
 .user {
   display: flex;
@@ -13,4 +15,8 @@
 .avatar {
   border-radius: 100px;
   margin-right: 1rem;
+}
+.content {
+  font-size: 0.7rem;
+  word-break: break-all;
 }

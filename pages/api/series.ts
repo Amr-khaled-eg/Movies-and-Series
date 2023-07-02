@@ -4,7 +4,8 @@ import { Fetch } from "@/utils/fetch/fetch-data.utils";
 import { Item } from "../movies";
 import { certifications } from "@/public/countries";
 type Data = {
-  items: Item[];
+  items?: Item[];
+  error?: string;
 };
 // `https://api.themoviedb.org/3/movie/top_rated?api_key=${
 //   process.env.API_KEY
@@ -73,6 +74,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const data = await Fetch(createLink(req.query));
-  res.status(200).json({ items: data.results });
+  try {
+    const data = await Fetch(createLink(req.query));
+    res.status(200).json({ items: data.results });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
 }

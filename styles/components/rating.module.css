@@ -6,7 +6,7 @@
 .rating {
   color: var(--yellow);
   margin-left: 8px;
-  margin-top: 3px;
+  margin-top: -3px;
 }
 .m {
   font-size: 1.5rem;

@@ -29,6 +29,7 @@ const CardsSlider = ({ cards, icon, header, location }: CardsSliderProps) => {
       </div>
       <Glider
         draggable
+        exactWidth={true}
         hasArrows={true}
         arrows={{
           prev: `#${header.slice(0, 2)}b`,
@@ -36,16 +37,11 @@ const CardsSlider = ({ cards, icon, header, location }: CardsSliderProps) => {
         }}
         slidesToScroll={"auto"}
         slidesToShow={"auto"}
-        itemWidth={210}
-        dragVelocity={1.5}
+        itemWidth={230}
+        dragVelocity={1.2}
       >
         {cards.map((card: CardData, i) => (
-          <Card
-            {...card}
-            to={`/item/${location}/${card.id}`}
-            key={uuidV4()}
-            className={styles.cardMobile}
-          />
+          <Card {...card} to={`/item/${location}/${card.id}`} key={uuidV4()} />
         ))}
       </Glider>
       <button

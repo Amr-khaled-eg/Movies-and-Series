@@ -21,7 +21,7 @@ const Review = ({ rating, name, content, avatar }: ReviewProps) => {
         />
         <p className={styles.name}>{name}</p>
       </div>
-      <p className={styles.content}>{content.slice(0, 400)}...</p>
+      <p className={styles.content}>{content.slice(0, 350)}...</p>
     </div>
   );
 };
