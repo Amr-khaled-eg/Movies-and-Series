@@ -10,7 +10,7 @@ import Right from "@/public/right.svg";
 import Image from "next/image";
 import { v4 as uuidV4 } from "uuid";
 type CardsSliderProps = {
-  cards: [CardData];
+  cards: CardData[];
   icon: string;
   header: string;
   location: string;
@@ -47,7 +47,7 @@ const CardsSlider = ({
         itemWidth={230}
         dragVelocity={1.2}
       >
-        {cards.map((card: CardData, i) => (
+        {cards?.map((card: CardData, i) => (
           <Card {...card} to={`/item/${location}/${card.id}`} key={uuidV4()} />
         ))}
       </Glider>

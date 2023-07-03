@@ -8,18 +8,9 @@ import { Categories } from "@/components/filter/fiilter.comoponent";
 import MainSlider from "@/components/main-slider/main-slider.component";
 import styles from "@/styles/home.module.css";
 import Head from "next/head";
-export type Item = {
-  [key: string]: any;
-  overview: string;
-} & CardData;
+import { CategoryProps } from "../movies";
 
-type MoviesProps = {
-  topRated: [Item];
-  korean: [Item];
-  trending: [Item];
-};
-
-export default function Seires({ topRated, trending, korean }: MoviesProps) {
+export default function Seires({ topRated, trending, korean }: CategoryProps) {
   return (
     <>
       <Head>
@@ -33,27 +24,33 @@ export default function Seires({ topRated, trending, korean }: MoviesProps) {
         <MainSlider
           items={[topRated[0], topRated[1], trending[0], korean[0]]}
         />
-        <CardsSlider
-          header="Top-Rated"
-          cards={topRated}
-          icon={TopRated}
-          location="tv"
-          to={`/seires/filtered?category=${Categories.TOP_RATED}`}
-        />
-        <CardsSlider
-          header="Trending"
-          cards={trending}
-          icon={Trending}
-          location="tv"
-          to={`/seires/filtered?category=${Categories.TRENDING}`}
-        />
-        <CardsSlider
-          header="Best Korean"
-          cards={korean}
-          icon={Popular}
-          location="tv"
-          to={`/seires/filtered?category=${Categories.TOP_RATED}&country=KR_ko`}
-        />
+        {topRated && (
+          <CardsSlider
+            header="Top-Rated"
+            cards={topRated}
+            icon={TopRated}
+            location="tv"
+            to={`/seires/filtered?category=${Categories.TOP_RATED}`}
+          />
+        )}
+        {trending && (
+          <CardsSlider
+            header="Trending"
+            cards={trending}
+            icon={Trending}
+            location="tv"
+            to={`/seires/filtered?category=${Categories.TRENDING}`}
+          />
+        )}
+        {korean && (
+          <CardsSlider
+            header="Best Korean"
+            cards={korean}
+            icon={Popular}
+            location="tv"
+            to={`/seires/filtered?category=${Categories.TOP_RATED}&country=KR_ko`}
+          />
+        )}
       </section>
     </>
   );
@@ -66,9 +63,9 @@ export async function getServerSideProps() {
   );
   return {
     props: {
-      topRated: topRated.items,
-      trending: trending.items,
-      korean: korean.items,
+      topRated: topRated?.items,
+      trending: trending?.items,
+      korean: korean?.items,
     },
   };
 }

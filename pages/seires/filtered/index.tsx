@@ -1,16 +1,15 @@
 import { FetchMyAPI } from "@/utils/fetch/fetch-data.utils";
 import { GetServerSidePropsContext } from "next";
-import { Item } from "..";
+import { Item } from "@/pages/movies/index";
 import Inventory from "@/components/inventory/inventory.component";
 import Filter from "@/components/filter/fiilter.comoponent";
-import { useRouter } from "next/router";
 import { stringify } from "querystring";
 type FlteredItemsProps = {
   initialItems: Item[];
 };
 const FetchMore = async (page: number, query: string): Promise<Item[]> => {
   const data = await FetchMyAPI(`/series?page=${page}&${query}`);
-  return data.items;
+  return data?.items;
 };
 export default function FilteredMovies({ initialItems }: FlteredItemsProps) {
   return (

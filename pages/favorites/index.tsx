@@ -34,7 +34,7 @@ const Favorites = () => {
           header="Favorites"
           className={styles.header}
         />
-        {favorites.map((item) => (
+        {favorites?.map((item) => (
           <BigCard key={uuidV4()} item={item} remove={remove} />
         ))}
       </section>

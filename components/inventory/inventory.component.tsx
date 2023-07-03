@@ -52,7 +52,7 @@ const Inventory = ({ initialItems, FetchMore, location }: InventroyProps) => {
   return (
     <>
       <section className={styles.grid}>
-        {loadedItems.map((card, i) => (
+        {loadedItems?.map((card, i) => (
           <Card
             {...card}
             to={`/item/${location}/${card.id}`}

@@ -107,7 +107,7 @@ const Search = ({ icon, show, toggleShow, ...otherProps }: SearchProps) => {
           isAutoCompleteShown ? styles.show : styles.hide
         }`}
       >
-        {searchResult.map((item: SearchData) => (
+        {searchResult?.map((item: SearchData) => (
           <SearchResult key={uuidV4()} {...item} to={getSearchGategory()} />
         ))}
       </div>

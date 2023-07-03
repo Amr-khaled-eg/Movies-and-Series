@@ -18,6 +18,7 @@ const Review = ({ rating, name, content, avatar }: ReviewProps) => {
           alt={name}
           width={40}
           height={40}
+          quality={40}
         />
         <p className={styles.name}>{name}</p>
       </div>

@@ -23,7 +23,7 @@ const MainSlider = ({ items }: SliderProps) => {
   return (
     <section className={styles.sliderContainer}>
       <div className={styles.imagesContainer}>
-        {items.map((item, i) => (
+        {items?.map((item, i) => (
           <Image
             src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
             alt="cover image"
@@ -40,7 +40,7 @@ const MainSlider = ({ items }: SliderProps) => {
         ))}
       </div>
       <div className={styles.infoContainer}>
-        {items.map((item, i) => (
+        {items?.map((item, i) => (
           <div
             className={`${styles.itemInfo} ${styles.hide} ${styles.hideInfo} ${
               shownIndex == i && styles.show
@@ -56,7 +56,7 @@ const MainSlider = ({ items }: SliderProps) => {
           </div>
         ))}
         <div className={styles.btnsContainer}>
-          {items.map((item, i) => (
+          {items?.map((item, i) => (
             <button
               className={styles.sliderBtn}
               onClick={() => setShowIndex(i)}

@@ -6,6 +6,7 @@ const CastMember = ({ member }: any) => {
       <Image
         width="100"
         height="99"
+        quality={50}
         src={`https://image.tmdb.org/t/p/original${member.profile_path}`}
         alt={member.name}
         className={styles.castMemberImage}

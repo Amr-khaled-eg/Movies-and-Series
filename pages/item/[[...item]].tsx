@@ -41,10 +41,15 @@ const Item = ({ data, cast, reviews, similar }: ItemProps) => {
         <title>{data.title || data.name}</title>
         <meta name="description" content={data.overview} />
       </Head>
-      <img
+      <Image
         className={styles.backdropImage}
         src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
         alt={data.title || ""}
+        width={1920}
+        height={1080}
+        sizes="(max-width: 600px) 100vh, (max-width: 1200px) 50%, 800px"
+        quality={60}
+        priority
       />
       <div className={styles.overlay}></div>
       <section className={styles.mainSection}>
@@ -63,7 +68,7 @@ const Item = ({ data, cast, reviews, similar }: ItemProps) => {
         <div>
           <span className={styles.types}>Country</span>:&emsp;
           <span className={styles.typeValue}>
-            {data.production_countries.map((country: any, i: number) =>
+            {data.production_countries?.map((country: any, i: number) =>
               i !== 0 ? "," + country.iso_3166_1 : country.iso_3166_1
             )}
           </span>
@@ -71,7 +76,7 @@ const Item = ({ data, cast, reviews, similar }: ItemProps) => {
         <div>
           <span className={styles.types}>Gener</span>:&emsp;
           <span className={styles.typeValue}>
-            {data.genres.map((gener: any, i: number) =>
+            {data.genres?.map((gener: any, i: number) =>
               i !== 0 ? "," + gener.name : gener.name
             )}
           </span>
@@ -92,7 +97,7 @@ const Item = ({ data, cast, reviews, similar }: ItemProps) => {
           className={styles.sectionHeader}
         />
         <section className={`${styles.grid}`}>
-          {cast.slice(0, 9).map((actor: any, i: number) => (
+          {cast.slice(0, 9)?.map((actor: any, i: number) => (
             <CastMember member={actor} key={uuidV4()} />
           ))}
         </section>
@@ -106,7 +111,7 @@ const Item = ({ data, cast, reviews, similar }: ItemProps) => {
 
         {reviews.length > 0 ? (
           <section className={`${styles.grid} ${styles.reviews} `}>
-            {reviews.slice(0, 3).map((review: any) => (
+            {reviews.slice(0, 3)?.map((review: any) => (
               <Review
                 rating={review.author_details.rating}
                 name={review.author}
@@ -130,7 +135,7 @@ const Item = ({ data, cast, reviews, similar }: ItemProps) => {
         )}
       </section>
       <section className={styles.similar}>
-        {query.item && (
+        {query.item && similar.length != 0 && (
           <CardsSlider
             cards={similar}
             header="You May Also Like"

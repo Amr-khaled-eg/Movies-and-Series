@@ -81,7 +81,7 @@ const Filter = () => {
       if (options) {
         setFilterOptions({
           ...options,
-          countries: Object.keys(countries).map((country: string) => ({
+          countries: Object.keys(countries)?.map((country: string) => ({
             ...countries[country as keyof typeof countries],
             countryCode: country,
           })),
@@ -95,7 +95,7 @@ const Filter = () => {
       if (options) {
         setFilterOptions({
           ...options,
-          countries: Object.keys(countries).map((country: string) => ({
+          countries: Object.keys(countries)?.map((country: string) => ({
             ...countries[country as keyof typeof countries],
             countryCode: country,
           })),
@@ -130,7 +130,7 @@ const Filter = () => {
         <option value="">Country</option>
 
         {filterOptions &&
-          filterOptions.countries.map((item, i) => {
+          filterOptions.countries?.map((item, i) => {
             return (
               <option
                 value={item.countryCode + "_" + item.languageCode}
@@ -151,7 +151,7 @@ const Filter = () => {
       >
         <option value="">Type</option>
         {filterOptions &&
-          filterOptions.genres.map((item, i) => {
+          filterOptions.genres?.map((item, i) => {
             return (
               <option
                 value={item.id}
@@ -171,7 +171,7 @@ const Filter = () => {
         value={filters.year}
       >
         <option value="">Year</option>
-        {getYears().map((year, i) => (
+        {getYears()?.map((year, i) => (
           <option value={year} className={styles.filterSelect} key={i * year}>
             {year}
           </option>

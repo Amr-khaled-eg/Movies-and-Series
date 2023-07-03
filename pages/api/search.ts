@@ -14,7 +14,7 @@ export default async function handler(
       `https://api.themoviedb.org/3/search/${type}?api_key=${process.env.API_KEY}&query=${searchTirm}`
     );
     res.status(200).json({
-      data: searchResult.results.map((item: any) => ({
+      data: searchResult.results?.map((item: any) => ({
         id: item.id,
         poster_path: item.poster_path,
         title: item.title || item.name,

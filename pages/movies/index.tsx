@@ -17,13 +17,13 @@ export type Item = {
   overview: string;
 } & CardData;
 
-type MoviesProps = {
-  topRated: [Item];
-  korean: [Item];
-  trending: [Item];
+export type CategoryProps = {
+  topRated: Item[];
+  korean: Item[];
+  trending: Item[];
 };
 
-export default function Movies({ topRated, trending, korean }: MoviesProps) {
+export default function Movies({ topRated, trending, korean }: CategoryProps) {
   return (
     <>
       <Head>
@@ -37,27 +37,33 @@ export default function Movies({ topRated, trending, korean }: MoviesProps) {
         <MainSlider
           items={[topRated[0], topRated[1], trending[0], korean[0]]}
         />
-        <CardsSlider
-          header="Top-Rated"
-          cards={topRated}
-          icon={TopRated}
-          to={`/movies/filtered?category=${Categories.TOP_RATED}`}
-          location="movie"
-        />
-        <CardsSlider
-          header="Trending"
-          cards={trending}
-          icon={Trending}
-          location="movie"
-          to={`/movies/filtered?category=${Categories.TRENDING}`}
-        />
-        <CardsSlider
-          header="Best Korean"
-          cards={korean}
-          icon={Popular}
-          location="movie"
-          to={`/movies/filtered?category=${Categories.TOP_RATED}&country=KR_ko`}
-        />
+        {topRated && (
+          <CardsSlider
+            header="Top-Rated"
+            cards={topRated}
+            icon={TopRated}
+            to={`/movies/filtered?category=${Categories.TOP_RATED}`}
+            location="movie"
+          />
+        )}
+        {trending && (
+          <CardsSlider
+            header="Trending"
+            cards={trending}
+            icon={Trending}
+            location="movie"
+            to={`/movies/filtered?category=${Categories.TRENDING}`}
+          />
+        )}
+        {korean && (
+          <CardsSlider
+            header="Best Korean"
+            cards={korean}
+            icon={Popular}
+            location="movie"
+            to={`/movies/filtered?category=${Categories.TOP_RATED}&country=KR_ko`}
+          />
+        )}
       </section>
     </>
   );
@@ -74,9 +80,9 @@ export async function getServerSideProps() {
   );
   return {
     props: {
-      topRated: topRatedMovies.items,
-      trending: trendingMovies.items,
-      korean: korean.items,
+      topRated: topRatedMovies?.items,
+      trending: trendingMovies?.items,
+      korean: korean?.items,
     },
   };
 }
