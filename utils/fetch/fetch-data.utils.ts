@@ -1,4 +1,4 @@
-const URL = "https://movies-and-series-five.vercel.app/api";
+const URL = "https://movies-and-series-ecru.vercel.app/api";
 export const Fetch = async (url: string, options?: RequestInit) => {
   try {
     const response = await fetch(url, {
