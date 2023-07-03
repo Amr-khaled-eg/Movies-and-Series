@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000/api";
+const URL = "https://movies-and-series-five.vercel.app/api";
 export const Fetch = async (url: string, options?: RequestInit) => {
   try {
     const response = await fetch(url, {
