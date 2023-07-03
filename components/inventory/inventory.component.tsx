@@ -5,6 +5,7 @@ import { Item } from "@/pages/movies";
 import { useRouter } from "next/router";
 import { stringify } from "querystring";
 import { v4 as uuidv4 } from "uuid";
+import { PropagateLoader } from "react-spinners";
 type InventroyProps = {
   initialItems: Item[];
   FetchMore: (pages: number, query: string) => Promise<Item[]>;
@@ -32,8 +33,6 @@ const Inventory = ({ initialItems, FetchMore, location }: InventroyProps) => {
     };
   }, []);
   useEffect(() => {
-    console.log(loadedPages);
-
     if (loadedPages === 1) return;
     const updateItems = async () => {
       setIsLoading(true);
@@ -46,7 +45,6 @@ const Inventory = ({ initialItems, FetchMore, location }: InventroyProps) => {
     };
     updateItems();
   }, [loadedPages]);
-  useEffect(() => console.log(isLoading), [isLoading]);
   useEffect(() => {
     setLoadedItems(initialItems);
     setLoadedPages(1);
@@ -55,10 +53,20 @@ const Inventory = ({ initialItems, FetchMore, location }: InventroyProps) => {
     <>
       <section className={styles.grid}>
         {loadedItems.map((card, i) => (
-          <Card {...card} to={`/item/${location}/${card.id}`} key={uuidv4()} />
+          <Card
+            {...card}
+            to={`/item/${location}/${card.id}`}
+            key={uuidv4()}
+            lazyLoad={false}
+          />
         ))}
       </section>
       <div className={styles.lastDiv} ref={lastDiv}></div>
+      {isLoading && (
+        <div className={styles.loading}>
+          <PropagateLoader color="#d3e1ff" />
+        </div>
+      )}
     </>
   );
 };

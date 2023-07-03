@@ -7,6 +7,7 @@ import { CardData } from "@/components/card/card.component";
 import { Categories } from "@/components/filter/fiilter.comoponent";
 import MainSlider from "@/components/main-slider/main-slider.component";
 import styles from "@/styles/home.module.css";
+import Head from "next/head";
 export type Item = {
   [key: string]: any;
   overview: string;
@@ -20,27 +21,41 @@ type MoviesProps = {
 
 export default function Seires({ topRated, trending, korean }: MoviesProps) {
   return (
-    <section className={styles.mainSection}>
-      <MainSlider items={[topRated[0], topRated[1], trending[0], korean[0]]} />
-      <CardsSlider
-        header="Top-Rated"
-        cards={topRated}
-        icon={TopRated}
-        location="tv"
-      />
-      <CardsSlider
-        header="Trending"
-        cards={trending}
-        icon={Trending}
-        location="tv"
-      />
-      <CardsSlider
-        header="Best Korean"
-        cards={korean}
-        icon={Popular}
-        location="tv"
-      />
-    </section>
+    <>
+      <Head>
+        <title>Seires</title>
+        <meta
+          name="description"
+          content="this page containes top-rated seires and trending seires and best korean seires"
+        />
+      </Head>
+      <section className={styles.mainSection}>
+        <MainSlider
+          items={[topRated[0], topRated[1], trending[0], korean[0]]}
+        />
+        <CardsSlider
+          header="Top-Rated"
+          cards={topRated}
+          icon={TopRated}
+          location="tv"
+          to={`/seires/filtered?category=${Categories.TOP_RATED}`}
+        />
+        <CardsSlider
+          header="Trending"
+          cards={trending}
+          icon={Trending}
+          location="tv"
+          to={`/seires/filtered?category=${Categories.TRENDING}`}
+        />
+        <CardsSlider
+          header="Best Korean"
+          cards={korean}
+          icon={Popular}
+          location="tv"
+          to={`/seires/filtered?category=${Categories.TOP_RATED}&country=KR_ko`}
+        />
+      </section>
+    </>
   );
 }
 export async function getServerSideProps() {

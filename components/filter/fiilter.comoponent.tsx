@@ -6,7 +6,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { FetchMyAPI } from "@/utils/fetch/fetch-data.utils";
 import { countries } from "@/public/countries.js";
 import { v4 as uuidv4 } from "uuid";
-
+import { useRouter } from "next/router";
 type genre = {
   id: number;
   name: string;
@@ -38,21 +38,19 @@ const getYears = (): number[] => {
   }
   return years;
 };
-// https://api.themoviedb.org/3/discover/movie?api_key=YOUR_API_KEY&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2023-01-01&primary_release_date.lte=2023-12-31&vote_average.gte=7
 let currentYear = new Date().getFullYear();
 
 export const Categories = {
   TOP_RATED: "vote_average.gte=8",
   BestKorean: `vote_average.gte=8&with_original_language=ko&region=KR`,
-  TRENDING: `primary_release_year.gte=${currentYear}&primary_release_year.lte=${
-    currentYear + 1
-  }`,
+  TRENDING: `primary_release_year.gte=${currentYear}`,
 };
 const Filter = () => {
   const [filterOptions, setFilterOptions] = useState<FilterOptions | null>(
     null
   );
   const [filters, setFilters] = useState<Query>({});
+  const router = useRouter();
   const updateFilters = (event: ChangeEvent<HTMLSelectElement>) => {
     setFilters({ ...filters, [event.target.name]: event.target.value });
   };
@@ -106,6 +104,8 @@ const Filter = () => {
       }
     };
     if (!setOptionsFromLS()) setOptionsFromAPI();
+
+    setFilters(router.query as Query);
   }, []);
   return (
     <section className={styles.filterSection}>
@@ -113,11 +113,10 @@ const Filter = () => {
         name="category"
         className={styles.filterSelect}
         onChange={updateFilters}
-        defaultValue={filters.category ? filters.category : "default"}
+        defaultValue={filters.category ? filters.category : ""}
+        value={filters.category}
       >
-        <option value="default" disabled>
-          Category
-        </option>
+        <option value="">Category</option>
         <option value={Categories.TOP_RATED}>Top-Rated</option>
         <option value={Categories.TRENDING}>Trending</option>
       </select>
@@ -125,11 +124,10 @@ const Filter = () => {
         name="country"
         className={styles.filterSelect}
         onChange={updateFilters}
-        defaultValue={filters.country ? filters.country : "default"}
+        defaultValue={filters.country ? filters.country : ""}
+        value={filters.country}
       >
-        <option value="default" disabled>
-          Country
-        </option>
+        <option value="">Country</option>
 
         {filterOptions &&
           filterOptions.countries.map((item, i) => {
@@ -148,11 +146,10 @@ const Filter = () => {
         name="type"
         className={styles.filterSelect}
         onChange={updateFilters}
-        defaultValue={filters.type ? filters.type : "default"}
+        defaultValue={filters.type ? filters.type : ""}
+        value={filters.type}
       >
-        <option value="default" disabled>
-          Type
-        </option>
+        <option value="">Type</option>
         {filterOptions &&
           filterOptions.genres.map((item, i) => {
             return (
@@ -170,11 +167,10 @@ const Filter = () => {
         name="year"
         className={styles.filterSelect}
         onChange={updateFilters}
-        defaultValue={filters.year ? filters.year : "default"}
+        defaultValue={filters.year ? filters.year : ""}
+        value={filters.year}
       >
-        <option value="default" disabled>
-          Year
-        </option>
+        <option value="">Year</option>
         {getYears().map((year, i) => (
           <option value={year} className={styles.filterSelect} key={i * year}>
             {year}

@@ -8,7 +8,7 @@ type SliderProps = {
 };
 let timeOut: string | number | NodeJS.Timeout = 0;
 const MainSlider = ({ items }: SliderProps) => {
-  const [shownIndex, setShowIndex] = useState(100);
+  const [shownIndex, setShowIndex] = useState(10);
   useEffect(() => {
     setShowIndex(0);
   }, []);
@@ -32,7 +32,10 @@ const MainSlider = ({ items }: SliderProps) => {
             } ${styles.sliderImage}`}
             width={500}
             height={700}
-            key={item.poster_path + i}
+            quality={65}
+            key={item.poster_path}
+            sizes="(max-width: 500px) 100%, , 500px"
+            priority={i === 0 ? true : false}
           />
         ))}
       </div>
@@ -42,7 +45,7 @@ const MainSlider = ({ items }: SliderProps) => {
             className={`${styles.itemInfo} ${styles.hide} ${styles.hideInfo} ${
               shownIndex == i && styles.show
             }`}
-            key={item.title || item.name + i}
+            key={item.id}
           >
             <Rating rating={item.vote_average} className={""} />
             <h1 className={styles.title}>{item.title || item.name}</h1>
@@ -57,7 +60,7 @@ const MainSlider = ({ items }: SliderProps) => {
             <button
               className={styles.sliderBtn}
               onClick={() => setShowIndex(i)}
-              key={i + item.vote_average}
+              key={i}
             >
               <div
                 className={`${styles.sliderBtnOver} ${
@@ -67,8 +70,9 @@ const MainSlider = ({ items }: SliderProps) => {
               <Image
                 src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
                 alt="cover image"
-                width={80}
-                height={120}
+                width={70}
+                height={100}
+                quality={30}
                 className={styles.btnImg}
               />
               <div className={styles.btnInfo}>

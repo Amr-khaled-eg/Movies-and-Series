@@ -13,6 +13,7 @@ import ReviewIcon from "@/public/star.svg";
 import Link from "next/link";
 import HeartIcon from "@/public/heart.svg";
 import CardsSlider from "@/components/cardsSlider/cards-slider.component";
+import Head from "next/head";
 type ItemData = {
   vote_average: number;
   name?: string;
@@ -36,6 +37,10 @@ const Item = ({ data, cast, reviews, similar }: ItemProps) => {
   const { query } = useRouter();
   return (
     <>
+      <Head>
+        <title>{data.title || data.name}</title>
+        <meta name="description" content={data.overview} />
+      </Head>
       <img
         className={styles.backdropImage}
         src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}

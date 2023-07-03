@@ -14,18 +14,25 @@ type CardsSliderProps = {
   icon: string;
   header: string;
   location: string;
+  to?: string;
 };
 
-const CardsSlider = ({ cards, icon, header, location }: CardsSliderProps) => {
-  const sellAllLocation = location === "movie" ? "movies" : "seires";
-
+const CardsSlider = ({
+  cards,
+  icon,
+  header,
+  location,
+  to,
+}: CardsSliderProps) => {
   return (
     <section className={styles.sliderContainer}>
       <div className={styles.sliderHeader}>
         <SectionHeader icon={icon} header={header} />
-        <Link href={`${sellAllLocation}/filtered`} className={styles.seeAll}>
-          See all
-        </Link>
+        {to && (
+          <Link href={`${to}`} className={styles.seeAll}>
+            See all
+          </Link>
+        )}
       </div>
       <Glider
         draggable

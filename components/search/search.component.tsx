@@ -14,6 +14,7 @@ import SearchResult, {
   SearchData,
 } from "@/components/searchResult/searchResult.component";
 import { v4 as uuidV4 } from "uuid";
+import { useRouter } from "next/router";
 type SearchProps = {
   icon?: boolean;
   show?: boolean;
@@ -26,17 +27,22 @@ const Search = ({ icon, show, toggleShow, ...otherProps }: SearchProps) => {
   const [searchValue, setSearchValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
-
+  const currentPath = useRouter().asPath.split("/");
+  const getSearchGategory = () => {
+    if (currentPath[1] == "movies" || currentPath[2] == "movie") return "movie";
+    if (currentPath[1] == "seires" || currentPath[2] == "tv") return "tv";
+    return "movie";
+  };
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.value.trim() != "") {
       setIsAutoCompleteShown(true);
     } else {
       setIsAutoCompleteShown(false);
     }
-    setSearchValue(e.target.value.trim());
+    setSearchValue(e.target.value);
   };
   useEffect(() => {
-    if (searchValue == "") return;
+    if (searchValue.trim() == "") return;
 
     if (timeoutIdRef.current) {
       clearTimeout(timeoutIdRef.current);
@@ -45,7 +51,9 @@ const Search = ({ icon, show, toggleShow, ...otherProps }: SearchProps) => {
       try {
         setIsLoading(true);
 
-        const result = await FetchMyAPI(`/search?searchTirm=${searchValue}`);
+        const result = await FetchMyAPI(
+          `/search?searchTirm=${searchValue}&type=${getSearchGategory()}`
+        );
         console.log("called with new data");
 
         setSearchResult(result.data);
@@ -60,6 +68,7 @@ const Search = ({ icon, show, toggleShow, ...otherProps }: SearchProps) => {
       }
     };
   }, [searchValue]);
+
   return (
     <div
       className={
@@ -77,7 +86,9 @@ const Search = ({ icon, show, toggleShow, ...otherProps }: SearchProps) => {
       )}
       <input
         type="search"
-        placeholder="Search"
+        placeholder={`Search ${
+          getSearchGategory() == "movie" ? "Movies" : "Series"
+        }`}
         value={searchValue}
         className={styles.searchInput}
         onChange={handleChange}
@@ -97,7 +108,7 @@ const Search = ({ icon, show, toggleShow, ...otherProps }: SearchProps) => {
         }`}
       >
         {searchResult.map((item: SearchData) => (
-          <SearchResult key={uuidV4()} {...item} />
+          <SearchResult key={uuidV4()} {...item} to={getSearchGategory()} />
         ))}
       </div>
     </div>

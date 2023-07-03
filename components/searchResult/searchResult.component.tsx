@@ -6,11 +6,20 @@ export type SearchData = {
   title: string;
   poster_path: string;
   release_date: string;
+  to: string;
 };
 
-const SearchResult = ({ id, title, poster_path, release_date }: SearchData) => {
+const SearchResult = ({
+  id,
+  title,
+  poster_path,
+  release_date,
+  to,
+}: SearchData) => {
+  console.log(to);
+
   return (
-    <Link href={`/item/movie/${id}`} className={styles.resultLink}>
+    <Link href={`/item/${to}/${id}`} className={styles.resultLink}>
       <div className={styles.result}>
         <Image
           src={`https://image.tmdb.org/t/p/original${poster_path}`}

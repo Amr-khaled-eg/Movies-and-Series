@@ -37,6 +37,7 @@ type CardProps = {
   to: string;
   id: number;
   className?: string;
+  lazyLoad?: boolean;
 } & CardData;
 
 const Card = ({
@@ -47,6 +48,7 @@ const Card = ({
   id,
   to,
   className,
+  lazyLoad,
 }: CardProps) => {
   const [isLoved, setIsLoved] = useState(false);
   useEffect(() => {
@@ -96,7 +98,8 @@ const Card = ({
           className={styles.cardImage}
           width={200}
           height={300}
-          priority={true}
+          quality={40}
+          priority={lazyLoad ? false : true}
         />
         <div className={styles.cardInfo}>
           <Rating rating={vote_average} />
