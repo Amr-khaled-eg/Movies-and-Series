@@ -1,6 +1,7 @@
 import Rating from "../rating/rating.comopnent";
 import styles from "@/styles/components/review.module.css";
 import Image from "next/image";
+import Avatar from "@/public/avatar.svg";
 type ReviewProps = {
   rating: number;
   name: string;
@@ -14,7 +15,7 @@ const Review = ({ rating, name, content, avatar }: ReviewProps) => {
       <div className={styles.user}>
         <Image
           className={styles.avatar}
-          src={`https://image.tmdb.org/t/p/original${avatar}`}
+          src={avatar ? `https://image.tmdb.org/t/p/original${avatar}` : Avatar}
           alt={name}
           width={40}
           height={40}

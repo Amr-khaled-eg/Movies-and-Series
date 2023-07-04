@@ -19,7 +19,7 @@ const Inventory = ({ initialItems, FetchMore, location }: InventroyProps) => {
   const router = useRouter();
   useEffect(() => {
     const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
+      entries?.forEach((entry) => {
         if (entry.isIntersecting) {
           setLoadedPages((prev) => prev + 1);
         }

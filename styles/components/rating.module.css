@@ -2,23 +2,28 @@
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+  height: 2rem;
 }
 .rating {
   color: var(--yellow);
   margin-left: 8px;
-  margin-top: -3px;
+  margin-top: 2px;
+}
+.star {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 .m {
   font-size: 1.5rem;
 }
 .mStar {
-  width: 28px;
-  height: 28px;
+  width: 1.7rem;
+  height: 1.7rem;
 }
 .l {
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 .lStar {
-  width: 36px;
-  height: 36px;
+  width: 2rem;
+  height: 2rem;
 }

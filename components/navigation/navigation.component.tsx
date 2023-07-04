@@ -6,6 +6,7 @@ import NavLinks from "./nav-links/nav-links.component";
 import burger from "@/public/burger.svg";
 import SearchIcon from "@/public/search.svg";
 import { useState } from "react";
+import Link from "next/link";
 const Navigation = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +18,9 @@ const Navigation = () => {
   };
   return (
     <nav className={styles.navContainer}>
-      <Image src={Logo} alt="logo" />
+      <Link href="/movies">
+        <Image src={Logo} alt="logo" />
+      </Link>
       <Search icon={true} show={isSearchOpen} toggleShow={toggleSearch} />
       <div className={styles.navIconsContainer}>
         <Image

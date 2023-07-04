@@ -5,12 +5,16 @@ import { HTMLAttributes } from "react";
 type RatingProps = {
   rating: number;
   size?: string;
+  className?: string;
 } & HTMLAttributes<HTMLDivElement>;
-const Rating = ({ rating, size, ...other }: RatingProps) => {
+const Rating = ({ rating, size, className, ...other }: RatingProps) => {
   const customeSizeRating = size && styles[size];
   const customeSizeStar = size && styles[size + "Star"];
   return (
-    <div className={styles.ratingContainer} {...other}>
+    <div
+      className={`${styles.ratingContainer} ${className ? className : ""}`}
+      {...other}
+    >
       <Image
         src={Star}
         alt="star"

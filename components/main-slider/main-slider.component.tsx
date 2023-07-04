@@ -47,7 +47,7 @@ const MainSlider = ({ items }: SliderProps) => {
             }`}
             key={item.id}
           >
-            <Rating rating={item.vote_average} className={""} />
+            <Rating rating={item.vote_average} size="m" />
             <h1 className={styles.title}>{item.title || item.name}</h1>
             <div className={styles.storyContainer}>
               <h3 className={styles.storyTitle}>story</h3>

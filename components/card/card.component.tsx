@@ -103,9 +103,9 @@ const Card = ({
         />
         <div className={styles.cardInfo}>
           <Rating rating={vote_average} />
-          <h4>
-            {itemTitle.length > 18 ? `${itemTitle.slice(0, 17)}...` : itemTitle}
-          </h4>
+          <h3>
+            {itemTitle.length > 15 ? `${itemTitle.slice(0, 15)}...` : itemTitle}
+          </h3>
         </div>
       </section>
     </Link>
